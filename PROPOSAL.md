@@ -12,6 +12,7 @@ Wire Frames
 
 User Stories
 MVP Goals
+
 -As a Player, I want to know when I've died 1-3 times during my adventure.
 
 -As a Player, I want to know how many continues I have left (1-3 lives left)
