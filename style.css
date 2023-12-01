@@ -1,0 +1,33 @@
+#startPage {
+    position: center;
+    text-align: center;
+}
+
+h1 {
+    position: absolute;
+    top: 150px; /* Adjust the top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(235, 228, 228); /* Adjust text color as needed */
+    font-family: 'Courier New', Courier, monospace;
+    
+}
+
+#startGame {
+    position: absolute;
+    top: 210px; /* Adjust the top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #941d45; /* Adjust button background color as needed */
+    color: rgb(225, 222, 222); /* Adjust button text color as needed */
+    border: black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+img {
+    width: 100%; /* Make sure the image covers the entire width of its container */
+    height: auto; /* Maintain the aspect ratio */
+}
