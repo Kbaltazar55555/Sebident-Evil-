@@ -1,40 +1,54 @@
-# Sebident-Evil-
-Unit 1 Project For GASEB
-
 # Sebident-Evil
 # Initialize player
 player = createPlayer()
 
 # Display introduction
-display"You have Once Again entered...the world of survival"
+display("You have once again entered the world of survival.")
 
-# Set the maximum number of Lives                          -Player will have 3 chances throughout the adventure.  
-maxLives = 3                                               -Player will die at the end of those lives, and return to main screen
+# Set the maximum number of Lives
+maxLives = 3
 
 # Initialize the Lives counter
 remainingLives = maxLives
 
-# Store last scenarioLocation                              -Where player was when making incorrect choice   
+# Store last scenario location
+lastScenarioLocation = None
 
 # Main game loop
-while !player.isGameOver():                                -game loop continues until player dies during the game
+while not player.isGameOver() and remainingLives > 0:
     # Display current location and prompt for user input
-    display(player.getCurrentLocation().getDescription())  -Understand where player is (in which scenario(4)
-    display("Choices:")                                    -Understand choices available to player in the in scenario(4)
-    display(player.getCurrentLocation().getChoices())      -Shows choices to player in the Scenario(4)
+    currentLocation = player.getCurrentLocation()
+    display(currentLocation.getDescription())
+    display("Choices:")
+    display(currentLocation.getChoices())
 
-    # retrieves user input                                 -Player makes 1/3 choices in sub scenarios
+    # Retrieve user input
     userInput = getUserInput()
 
-    # Game Processes user input                            -Player has 3 maxLives during the time of playthrough.  
-    if userInput == "Dies":
-        player.setGameOver(true)
+    # Process user input
+    if userInput.lower() == "die":
+        player.setGameOver(True)
     else:
-        # Update scenario location based on user input     -if PlayerLives is < maxLives(3), then return to last scenarioLocation        
-         scenario.updateLocation(userInput)
+        # Update scenario location based on user input
+        lastScenarioLocation = currentLocation
+        currentLocation.updateLocation(userInput)
 
-# Display game over message                                -if Maxlives === 0, display game message.  Return to title screen
-display("You died. Game over.")
+        # Check if player lost a life
+        if currentLocation.isDangerous():
+            remainingLives -= 1
+            display("You lost a life! Remaining lives: " + str(remainingLives))
 
-# Display game ending message                              -If player completes all 4 scenarios && MaxLives > 0, then display game ending.  Return to title screen with (secret character - stretch goal
-display(Police Station ending)
+# Display game over or ending message
+if remainingLives == 0:
+    display("You ran out of lives. Game over.")
+else:
+    # Check if player completed all scenarios
+    if player.hasCompletedAllScenarios():
+        # Display secret ending message
+        display("Congratulations! You successfully completed all scenarios and unlocked the Police Station ending.")
+    else:
+        # Display generic game over message
+        display("You died. Game over.")
+
+# Return to title screen
+display("Returning to title screen.")
