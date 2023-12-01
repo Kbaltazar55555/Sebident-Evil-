@@ -1,10 +1,20 @@
 //# Sebident-Evil
 
 //# Initialize player
-player = createPlayer()
+player = startGame
 
-//# Display introduction
-display("You have once again entered the world of survival.")
+document.addEventListener('DOMload',function() {
+    var startPage = document.getElementById('startPage');
+    var gamePage = document.getElementById('gamePage');
+    var startGameButton = document.getElementById('startGame');
+
+    startGameButton.addEventListener('click,' function() {
+        startPage.style.display = 'none';
+        gamePage.style.display = 'block';
+    });
+});
+
+
 
 //# Set the maximum number of Lives
 maxLives = 3
