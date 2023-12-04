@@ -1,0 +1,46 @@
+var storyLine = {
+    currentAct: "Act1",
+    Act1: {
+        title: "Car Crash Escape",
+        question: "question text",
+        choices: [
+            { choice: "option 1 text" },     
+            { choice: "option 2 text" },
+            { choice: "option 3 text" }
+        ]
+    }
+};
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var button = document.querySelector('#startGame');
+    var startPage = document.querySelector('#startPage');
+    
+    // Add event listener to the button and call the renderAct function
+    button.addEventListener('click', renderAct);
+
+    // The renderAct function that updates the startPage.innerHTML
+    function renderAct() {
+        startPage.innerHTML = `
+            <h1>${storyLine[storyLine.currentAct].title}</h1>
+            <p>${storyLine[storyLine.currentAct].question}</p>
+            <div>
+                <label for="choice1">choice 1 text</label>
+                <input id="choice1" type="radio" name="options"/>
+            </div>
+            <div>
+                <label for="choice2">choice 2 text</label> 
+                <input id="choice2" type="radio" name="options"/>
+            </div>
+            <div>
+                <label for="choice3">choice 3 text</label>
+                <input id="choice3" type="radio" name="options" />
+            </div>
+            <button id = "confirm">next</button>`;
+
+            var button = document.querySelector("#confirm");
+            button.addEventListener('click', function() {
+            }
+    )}
+});

@@ -31,7 +31,7 @@ var storyline = {
     "You see piles of bloody bodies, but...they're moving!!! You have to run away!": {
         title: "You see piles of bloody bodies, but...they're moving!!! You have to run away!",
         story: "You see piles of bloody bodies, but...they're moving!!! You have to run away!",
-        result: ""
+        result: "Text here"
     }
 };
     
@@ -39,21 +39,28 @@ var storyline = {
 document.addEventListener('DOMContentLoaded', function() {
     var button = document.querySelector('#startGame');
     console.log(button);
-
     var startPage = document.querySelector('#startPage');
     button.addEventListener('click', function() {
         console.log('You have once again entered the world of horror');
+
         renderAct();
     });
 });
+
+function getChoices() {
+    for(var i = 0; i < 3; i++) {
+        console.log(i)
+    }
+}
 
 function renderAct() {
     startPage.innerHTML = `
             <h1>${storyline[storyline.currentAct].title}</h1>
             <p>${storyline[storyline.currentAct].question}</p>
             ${getOptions(storyline.currentAct)}
-            <button id="confirm" onclick="logSelectedOptionDestination()">Confirm</button>`;
+            <button id="confirm" oneclick="logSelectedOptionDestination()">Confirm</button>`;
 }
+
 
 function logSelectedOptionDestination() {
     var options = document.querySelectorAll('input[type="radio"]');
@@ -61,9 +68,9 @@ function logSelectedOptionDestination() {
     if (options && options.length > 0) {
         for (var i = 0; i < options.length; i++) {
             if (options[i].checked) {
-                var destination = options[i].getAttribute('data-destination');
-                if (destination) {
-                    storyline.currentAct = destination;
+                var result = options[i].getAttribute('result');
+                if (result) {
+                    storyline.currentAct = result;
                     renderAct();
                 }
             }
@@ -73,18 +80,20 @@ function logSelectedOptionDestination() {
     }
 }
 
+
 function getOptions(currentAct) {
     var options1 = '';
     for (var i = 0; i < storyline[currentAct].options.length; i++) {
         options1 += `
         <div>
             <label for="choice${i + 1}">${storyline[currentAct].options[i].option}</label>
-            <input data-destination="${storyline[currentAct].options[i].result}" id="choice${i + 1}" type="radio" name="choices">
+            <input result="${storyline[currentAct].options[i].result}" id="choice${i + 1}" type="radio" name="choices">
         </div>`;
-        console.log(storyline[currentAct].options[i].option);
+        //console.log(storyline[currentAct].options[i].option);
     }
     return options1;
 }
+
 
 
 //# Set the maximum number of Lives
