@@ -8,7 +8,7 @@ h1 {
     top: 150px; 
     left: 50%;
     transform: translateX(-50%);
-    color: rgb(235, 228, 228); 
+    color: rgb(182, 91, 91); 
     font-family: 'Courier New', Courier, monospace;
     
 }
@@ -31,3 +31,7 @@ img {
     width: 100%; 
     height: auto; 
 }
+
+
+
+

@@ -1,18 +1,67 @@
 //# Sebident-Evil
 
 //# Initialize player
-player = startGame
+//player = startGame
 
-document.addEventListener('DOMload',function() {
-    var startPage = document.getElementById('startPage');
-    var gamePage = document.getElementById('gamePage');
-    var startGameButton = document.getElementById('startGame');
 
-    startGameButton.addEventListener('click,' function() {
-        startPage.style.display = 'none';
-        gamePage.style.display = 'block';
+var storyline = {
+    Act1: {
+        title: "Car Crash Escape", 
+        question: "You open your eyes with a pounding headache. Looks like you've just been in a car accident. Dizzy, but still moving. The car is completely wrecked...",
+        options: [
+            { choice: "Wait and hide in a nearby alley.", 
+              result: "A horde of zombies attack you! You died!" },
+            { choice: "Can't waste time, go into the back of your vehicle to get your weapons.", 
+              result: "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!" },
+            { choice: "Move down the street, away from the fire.", 
+              result: "You see piles of bloody bodies, but...they're moving!!! You have to run away!" }
+        ]
+    }
+};
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var button = document.querySelector('#startGame');
+    console.log(button);
+
+    var startPage = document.querySelector('#startPage');
+    button.addEventListener('click', function() {
+        console.log('You have once again entered the world of horror');
+
+        startPage.innerHTML = `
+        <h1>${storyline.Act1.title}</h1>
+        <p>${storyline.Act1.question}</p>
+        <div>
+            <label for="choice1.1">${storyline.Act1.options[0].choice}</label>
+            <input id="choice1.1" type="radio" name="choices">
+        </div>
+        <div>
+            <label for="choice1.2">${storyline.Act1.options[1].choice}</label>
+            <input id="choice1.2" type="radio" name="choices">
+        </div>
+        <div>
+            <label for="choice1.3">${storyline.Act1.options[2].choice}</label>
+            <input id="choice1.3" type="radio" name="choices">
+        </div>
+        <button>Confirm</button>
+        `;
     });
 });
+
+var button = document.querySelector("#confirm");
+button.addEventListener('click', function() {
+    console.log('Next Act');
+})
+
+function getChoiceSelection() {
+    var choices = document.querySelectorAll('input[type="radio"]');
+    for (var i = 0; i < choices.length; i++) {
+        if (choices[i].checked) {
+            console.log(choices[i].value);
+        }
+    }
+}
+
 
 
 
@@ -26,7 +75,7 @@ remainingLives = maxLives
 lastScenarioLocation = None
 
 //# Main game loop
-while not player.isGameOver() and remainingLives > 0:
+/*while not player.isGameOver() and remainingLives > 0:
     # Display current location and prompt for user input
     currentLocation = player.getCurrentLocation()
     display(currentLocation.getDescription())
@@ -62,4 +111,4 @@ else:
         display("You died. Game over.")
 
 //# Return to title screen
-display("Returning to title screen.")
+display("Returning to title screen.")*/
