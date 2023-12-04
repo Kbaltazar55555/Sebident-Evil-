@@ -5,20 +5,36 @@
 
 
 var storyline = {
+    currentAct: "Act1",
     Act1: {
-        title: "Car Crash Escape", 
+        title: "Car Crash Escape",
         question: "You open your eyes with a pounding headache. Looks like you've just been in a car accident. Dizzy, but still moving. The car is completely wrecked...",
         options: [
-            { choice: "Wait and hide in a nearby alley.", 
+            { option: "Wait and hide in a nearby alley", 
               result: "A horde of zombies attack you! You died!" },
-            { choice: "Can't waste time, go into the back of your vehicle to get your weapons.", 
+            { option: "Can't waste time, go into the back of your vehicle to get your weapons", 
               result: "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!" },
-            { choice: "Move down the street, away from the fire.", 
+            { option: "Move down the street, away from the fire", 
               result: "You see piles of bloody bodies, but...they're moving!!! You have to run away!" }
         ]
+    },
+    "A horde of zombies attack you! You died!": {
+        title: "A horde of zombies attack you! You died!",
+        story: "A horde of zombies attack you! You died!" ,
+        result: "Back to Main Screen"
+    },
+    "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!": {
+        title: "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!",
+        story: "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!" ,
+        result: "Back to Main Screen" 
+    },
+    "You see piles of bloody bodies, but...they're moving!!! You have to run away!": {
+        title: "You see piles of bloody bodies, but...they're moving!!! You have to run away!",
+        story: "You see piles of bloody bodies, but...they're moving!!! You have to run away!",
+        result: ""
     }
 };
-
+    
 
 document.addEventListener('DOMContentLoaded', function() {
     var button = document.querySelector('#startGame');
@@ -27,42 +43,48 @@ document.addEventListener('DOMContentLoaded', function() {
     var startPage = document.querySelector('#startPage');
     button.addEventListener('click', function() {
         console.log('You have once again entered the world of horror');
-
-        startPage.innerHTML = `
-        <h1>${storyline.Act1.title}</h1>
-        <p>${storyline.Act1.question}</p>
-        <div>
-            <label for="choice1.1">${storyline.Act1.options[0].choice}</label>
-            <input id="choice1.1" type="radio" name="choices">
-        </div>
-        <div>
-            <label for="choice1.2">${storyline.Act1.options[1].choice}</label>
-            <input id="choice1.2" type="radio" name="choices">
-        </div>
-        <div>
-            <label for="choice1.3">${storyline.Act1.options[2].choice}</label>
-            <input id="choice1.3" type="radio" name="choices">
-        </div>
-        <button>Confirm</button>
-        `;
+        renderAct();
     });
 });
 
-var button = document.querySelector("#confirm");
-button.addEventListener('click', function() {
-    console.log('Next Act');
-})
+function renderAct() {
+    startPage.innerHTML = `
+            <h1>${storyline[storyline.currentAct].title}</h1>
+            <p>${storyline[storyline.currentAct].question}</p>
+            ${getOptions(storyline.currentAct)}
+            <button id="confirm" onclick="logSelectedOptionDestination()">Confirm</button>`;
+}
 
-function getChoiceSelection() {
-    var choices = document.querySelectorAll('input[type="radio"]');
-    for (var i = 0; i < choices.length; i++) {
-        if (choices[i].checked) {
-            console.log(choices[i].value);
+function logSelectedOptionDestination() {
+    var options = document.querySelectorAll('input[type="radio"]');
+    
+    if (options && options.length > 0) {
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                var destination = options[i].getAttribute('data-destination');
+                if (destination) {
+                    storyline.currentAct = destination;
+                    renderAct();
+                }
+            }
         }
+    } else {
+        console.error("No radio options found.");
     }
 }
 
-
+function getOptions(currentAct) {
+    var options1 = '';
+    for (var i = 0; i < storyline[currentAct].options.length; i++) {
+        options1 += `
+        <div>
+            <label for="choice${i + 1}">${storyline[currentAct].options[i].option}</label>
+            <input data-destination="${storyline[currentAct].options[i].result}" id="choice${i + 1}" type="radio" name="choices">
+        </div>`;
+        console.log(storyline[currentAct].options[i].option);
+    }
+    return options1;
+}
 
 
 //# Set the maximum number of Lives
