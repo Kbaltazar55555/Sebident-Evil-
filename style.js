@@ -1,145 +1,116 @@
-//# Sebident-Evil
+const questionElement = document.getElementById('Question');
+const optionElement = document.getElementById('Options');
 
-//# Initialize player
-//player = startGame
+let state = {};
 
-
-var storyline = {
-    currentAct: "Act1",
-    Act1: {
-        title: "Car Crash Escape",
-        question: "You open your eyes with a pounding headache. Looks like you've just been in a car accident. Dizzy, but still moving. The car is completely wrecked...",
-        options: [
-            { option: "Wait and hide in a nearby alley", 
-              result: "A horde of zombies attack you! You died!" },
-            { option: "Can't waste time, go into the back of your vehicle to get your weapons", 
-              result: "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!" },
-            { option: "Move down the street, away from the fire", 
-              result: "You see piles of bloody bodies, but...they're moving!!! You have to run away!" }
-        ]
-    },
-    "A horde of zombies attack you! You died!": {
-        title: "A horde of zombies attack you! You died!",
-        story: "A horde of zombies attack you! You died!" ,
-        result: "Back to Main Screen"
-    },
-    "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!": {
-        title: "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!",
-        story: "The fire is too intense, as you're backing away, more zombies emerge from nearby cars to ambush you! You died!" ,
-        result: "Back to Main Screen" 
-    },
-    "You see piles of bloody bodies, but...they're moving!!! You have to run away!": {
-        title: "You see piles of bloody bodies, but...they're moving!!! You have to run away!",
-        story: "You see piles of bloody bodies, but...they're moving!!! You have to run away!",
-        result: "Text here"
-    }
-};
-    
-
-document.addEventListener('DOMContentLoaded', function() {
-    var button = document.querySelector('#startGame');
-    console.log(button);
-    var startPage = document.querySelector('#startPage');
-    button.addEventListener('click', function() {
-        console.log('You have once again entered the world of horror');
-
-        renderAct();
-    });
-});
-
-function getChoices() {
-    for(var i = 0; i < 3; i++) {
-        console.log(i)
-    }
+function startGame() {
+  state = {};
+  showQuestionNode(1);
 }
 
-function renderAct() {
-    startPage.innerHTML = `
-            <h1>${storyline[storyline.currentAct].title}</h1>
-            <p>${storyline[storyline.currentAct].question}</p>
-            ${getOptions(storyline.currentAct)}
-            <button id="confirm" oneclick="logSelectedOptionDestination()">Confirm</button>`;
-}
+function showQuestionNode(questionNodeIndex) {
+  const questionNode = questionNodes.find(node => node.id === questionNodeIndex);
+  questionElement.innerText = questionNode.question;
+  while (optionElement.firstChild) {
+    optionElement.removeChild(optionElement.firstChild);
+  }
 
-
-function logSelectedOptionDestination() {
-    var options = document.querySelectorAll('input[type="radio"]');
-    
-    if (options && options.length > 0) {
-        for (var i = 0; i < options.length; i++) {
-            if (options[i].checked) {
-                var result = options[i].getAttribute('result');
-                if (result) {
-                    storyline.currentAct = result;
-                    renderAct();
-                }
-            }
-        }
-    } else {
-        console.error("No radio options found.");
+  questionNode.options.forEach(option => {
+    if (showOption(option)) {
+      const button = document.createElement('button');
+      button.innerText = option.option;
+      button.classList.add('button');
+      button.addEventListener('click', () => selectOption(option));
+      optionElement.appendChild(button);
     }
+  });
 }
 
-
-function getOptions(currentAct) {
-    var options1 = '';
-    for (var i = 0; i < storyline[currentAct].options.length; i++) {
-        options1 += `
-        <div>
-            <label for="choice${i + 1}">${storyline[currentAct].options[i].option}</label>
-            <input result="${storyline[currentAct].options[i].result}" id="choice${i + 1}" type="radio" name="choices">
-        </div>`;
-        //console.log(storyline[currentAct].options[i].option);
-    }
-    return options1;
+function showOption(option) {
+  return option.requiredState == null;
 }
 
+function selectOption(option) {
+  const nextquestionNodeId = option.nextOption;
+  state = Object.assign(state, option.nextOption); // Change this line
+  if (nextquestionNodeId == 'Restart' || nextquestionNodeId == 'Try again') {
+    return startGame();
+  }
+  showQuestionNode(nextquestionNodeId);
+}
 
+const questionNodes = [
+  {
+    id: 1,
+    question: "You emerge from your car, dizzy, but unscathed. The car won't start...",
+    options: [
+      {
+        option: "Wait and hide in a nearby alley",
+        nextOption: 3
+      },
+      {
+        option: "Can't waste time, go into the back of your vehicle to get your weapons.",
+        nextOption: 3
+      },
+      {
+        option: "Move down the street, away from the fire.",
+        nextOption: 2
+      }
+    ]
+  },
+  {
+    id: 2,
+    question: "I'm out of breath. Why is this happening? I'm pushing these people off, but they keep coming for me! I'll take shelter at the local gun shop!",
+    options: [
+      {
+        option: "Burst through the front door with your foot.",
+        nextOption: 5
+      },
+      {
+        option: "Get through the door quietly, locking the deadbolt from inside.",
+        nextOption: 5
+      },
+      {
+        option: "Slowly turn the knob, as to not disturb the peace despite its fiery landscape.",
+        nextOption: 4
+      }
+    ]
+  },
+  {
+    id: 3,
+    question: "Zombies emerged from behind, and you were overpowered. YOU DIED.",
+    options: [
+      {
+        nextOption: 'Try again',
+      }
+    ]
+  },
+  {
+    id: 4,
+    question: "I'm relieved Kento is still alive and kicking, and not looking to eat me like those monsters out there...",
+    options: [
+      {
+        option: "Ask Kento What's going on?",
+        nextOption: 5
+      },
+      {
+        option: "Be a bastard and take his guns by force.",
+        nextOption: 6
+      },
+      {
+        option: "Barricade yourself with Kento and defend the store!.",
+        nextOption: 6
+      }]
+  },
+  {
+    id: 5,
+    question: "Kento wasn't really into those options.  In a fit of rage, he shot you. YOU DIED.",
+    options: [
+      {
+        nextOption: 'Try again',
+      }
+    ]
+  },
+];
 
-//# Set the maximum number of Lives
-maxLives = 3
-
-//# Initialize the Lives counter
-remainingLives = maxLives
-
-//# Store last scenario location
-lastScenarioLocation = None
-
-//# Main game loop
-/*while not player.isGameOver() and remainingLives > 0:
-    # Display current location and prompt for user input
-    currentLocation = player.getCurrentLocation()
-    display(currentLocation.getDescription())
-    display("Choices:")
-    display(currentLocation.getChoices())
-
-    //# Retrieve user input
-    userInput = getUserInput()
-
-    //# Process user input
-    if userInput.lower() == "die":
-        player.setGameOver(True)
-    else:
-        # Update scenario location based on user input
-        lastScenarioLocation = currentLocation
-        currentLocation.updateLocation(userInput)
-
-        # Check if player lost a life
-        if currentLocation.isDangerous():
-            remainingLives -= 1
-            display("You lost a life! Remaining lives: " + str(remainingLives))
-
-//# Display game over or ending message
-if remainingLives == 0:
-    display("You ran out of lives. Game over.")
-else:
-    # Check if player completed all scenarios
-    if player.hasCompletedAllScenarios():
-        # Display secret ending message
-        display("Congratulations! You successfully completed all scenarios and unlocked the Police Station ending.")
-    else:
-        # Display generic game over message
-        display("You died. Game over.")
-
-//# Return to title screen
-display("Returning to title screen.")*/
+startGame();
