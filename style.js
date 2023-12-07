@@ -227,17 +227,10 @@ const questionNodes = [
     question: "There's a horde of zombies out and about I'm going to try and sneak past...",
     options: [
       {
-        option: "Head out the front door!",
+        option: "Initiate SNEAKY FEET...",
         nextOption: 10.6
       },
-      {
-        option: "Head out the back door!.",
-        nextOption: 10.5
-      },
-      {
-        option: "Stay where you are!",
-        nextOption: 10.6
-      }]
+    ]
   },
   {
   id: 10.5,
@@ -255,7 +248,8 @@ const questionNodes = [
     options: [
       {
         option: "Head to the police station.",
-        nextOption: 11
+        nextOption: 11,
+        setState: {zombieBite: true}
       },
       ]
   },
@@ -296,14 +290,98 @@ const questionNodes = [
       },
       {
         option: "Call out for anyone loudly.",
-        nextOption: 11.2
+        nextOption: 11.1
       },
       {
         option: "Go into the Garage to look for a car to drive out of town!",
+        nextOption: 11.2
+      }]
+  },
+  {
+    id: 11.1,
+    question: "Zombie cops emerge from the precinct.  There's no way out.  You died! ",
+    options: [
+      {
+        option: "Try again.",
+        nextOption: 0
+      },
+      ]
+  },
+  {
+    id: 11.2,
+    question: "The garage is pitch black...",
+    options: [
+      {
+        option: "keep pressing forward.",
+        nextOption: 11.4
+      },
+      {
+        option: "Go back to the main floor.",
+        nextOption: 11.3
+      },
+      {
+        option: "Look for the circuit breaker.",
         nextOption: 11.3
       }]
   },
-
+  {
+    id: 11.3,
+    question: "It was too dark and walked right into a hidden horde of zombies!  You died! ",
+    options: [
+      {
+        option: "Try again.",
+        nextOption: 0
+      },
+      ]
+  },
+  {
+    id: 11.4,
+    question: "I found a patrol car, with the keys in the ignition. Car is turned on, time to escape this hell.",
+    options: [
+      {
+        option: "Drive out of town?",
+        nextOption: 11.5
+      },
+      {
+        option: "Drive to the local diner?  I'm hungry..",
+        nextOption: 11.5
+      },
+      {
+        option: "Drive Home.",
+        nextOption: 11.6
+      }]
+  },
+  {
+    id: 11.5,
+    question: "I arrived in the new area.  It's completely covered in zombies.  There's no where to run, and as I ran out of gas, a new horde notices me.  You died!",
+    options: [
+      {
+        option: "Try again.",
+        nextOption: 0
+      },
+      ]
+  },
+  {
+    id: 11.6,
+    question: "I'd like to collect myself first...I'm not sure how bad this infection has spread. You arrive back home.  Everything seems normal.  After checking the perimeter, you bariccade the house.",
+    options: [
+      {
+        option: "Go to sleep with the broomstick in hand",
+        nextOption: 11.7
+      },
+      ]
+  },
+  {
+    id: 11.7,
+    question: "it's morning.  It's still hellish out there. Will have to plan the next phase of my escape...Bali maybe?.",
+    options: [
+      {
+        option: "Thank you for playing!",
+        nextOption: 0
+      },
+      ]
+  },
+  
 ];
 
 startGame();
