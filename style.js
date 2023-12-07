@@ -1,11 +1,9 @@
 const questionElement = document.getElementById('Question');
 const optionElement = document.getElementById('Options');
 
-let state = {};
-
 function startGame() {
-  state = {};
-  showQuestionNode(1);
+    state = {};
+    showQuestionNode(0);
 }
 
 function showQuestionNode(questionNodeIndex) {
@@ -32,7 +30,7 @@ function showOption(option) {
 
 function selectOption(option) {
   const nextquestionNodeId = option.nextOption;
-  state = Object.assign(state, option.nextOption); // Change this line
+  state = Object.assign(state, option.nextOption); 
   if (nextquestionNodeId == 'Restart' || nextquestionNodeId == 'Try again') {
     return startGame();
   }
