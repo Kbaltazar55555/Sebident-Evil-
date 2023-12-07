@@ -3,19 +3,19 @@ const optionElement = document.getElementById('Options');
 const deathCountElement = document.getElementById('DeathCount');
 const livesLeftElement = document.getElementById('LivesLeft');
 
+document.addEventListener('DOMContentLoaded', function () {
+  let audio = new Audio('Hallowed Ground.wav');
+  audio.volume = 0.3;
+  audio.loop = true;
+  
+  audio.play();
+});
+
 let state = {
   deathCount: 0,
   livesLeft: 3,
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-  let audio = new Audio('Hallowed Ground.wav');
-  audio.volume = 0.3;
-  audio.addEventListener('canplaythrough', function () {
-    audio.play();
-  });
-  audio.loop = true;
-});
 
 function startGame() {
   resetGameState();
@@ -54,6 +54,12 @@ function showQuestionNode(questionNodeIndex) {
 
       if (option.nextOption === 0) {
         button.id = 'tryAgainButton';
+      }
+      if (questionNode.id === 11.7) {
+        const image = document.createElement('img');
+        image.src = 'https://imagizer.imageshack.com/v2/1280x1024q70/922/hZaOLN.jpg';
+        image.classList.add('centered-image'); 
+        questionElement.appendChild(image);
       }
 
       optionElement.appendChild(button);
@@ -455,3 +461,4 @@ options: [
 ];
 
 startGame();
+
