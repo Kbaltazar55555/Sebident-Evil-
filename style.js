@@ -3,9 +3,11 @@ const optionElement = document.getElementById('Options');
 
 document.addEventListener('DOMContentLoaded', function () {
     let audio = new Audio('Hallowed Ground.wav');
-    audio.volume = .3;
+    audio.volume = 0.3;
+    audio.addEventListener('canplaythrough', function () {
+        audio.play();
+    });
     audio.loop = true;
-    audio.play(); 
 });
 
 function startGame() {
