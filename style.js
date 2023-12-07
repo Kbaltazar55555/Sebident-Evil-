@@ -1,6 +1,13 @@
 const questionElement = document.getElementById('Question');
 const optionElement = document.getElementById('Options');
 
+document.addEventListener('DOMContentLoaded', function () {
+    let audio = new Audio('Hallowed Ground.wav');
+    audio.volume = .3;
+    audio.loop = true;
+    audio.play(); 
+});
+
 function startGame() {
     state = {};
     showQuestionNode(0);

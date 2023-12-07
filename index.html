@@ -8,14 +8,22 @@
     <script defer src="style.js"></script>
 </head>
 <body>
+    <h1>SEBident Evil</h1>
     <div class="container">
-        <div id="Question">Question</div>
+        <div id="Question" class="Question">Question</div>
         <div id="Options" class="button-layout">
             <button class="button">option 1</button>
             <button class="button">option 2</button>
             <button class="button">option 3</button>
         </div>
     </div>
+    <script>
+        let audio = new Audio('Hallowed Ground.wav');
+        audio.loop = true;
+            audio.addEventListener('loadedmetadata', function() {
+            audio.play(); 
+        });
+    </script>
 </body>
 </html>
 
