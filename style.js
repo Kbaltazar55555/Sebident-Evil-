@@ -40,6 +40,16 @@ function selectOption(option) {
 }
 
 const questionNodes = [
+    {
+        id: 0,
+        question: "Welcome to the world of Horror!",
+        options: [
+          {
+            option: "Start Game",
+            nextOption: 1
+          },
+        ]
+      },
   {
     id: 1,
     question: "You emerge from your car, dizzy, but unscathed. The car won't start...",
@@ -81,7 +91,8 @@ const questionNodes = [
     question: "Zombies emerged from behind you, and you were overpowered. YOU DIED.",
     options: [
       {
-        nextOption: 'Try again',
+        option: "Try again.",
+        nextOption: 0
       }
     ]
   },
@@ -107,7 +118,8 @@ const questionNodes = [
     question: "Kento was not down for that.  He dodges and shoots you in the chest.  You died!",
     options: [
       {
-        nextOption: 'Try again',
+        option: "Try again.",
+        nextOption: 0
       }
     ]
   },
@@ -116,7 +128,8 @@ const questionNodes = [
   question: "Kento and you spend a few minutes locking down the store, but then Kento comes from behind and bites you on the neck!  He's one of those things...You died!",
   options: [
     {
-      nextOption: 'Try again',
+        option: "Try again.",
+        nextOption: 0
     }
   ]
   },
@@ -142,7 +155,8 @@ const questionNodes = [
     question: "Kento got the upperhand and struck you with a critical blow!  You died!",
     options: [
       {
-        nextOption: 'Try again',
+        option: "Try again.",
+        nextOption: 0
       }
     ]
     },
@@ -161,7 +175,7 @@ const questionNodes = [
       },
       {
         option: "Go into the back, and break open the RESERVED WEAPONS case!",
-        nextOption: 10.5
+        nextOption: 10.7
       }]
   },
   {
@@ -186,7 +200,8 @@ const questionNodes = [
     question: "There's too many of these zombies outside!  I can't escape.... You died!",
     options: [
       {
-        nextOption: 'Try again',
+        option: "Try again.",
+        nextOption: 0
       }
     ]
     },
@@ -204,16 +219,16 @@ const questionNodes = [
       },
       {
         option: "Stay where you are!",
-        nextOption: 10.6
+        nextOption: 10.5
       }]
   },
   {
     id: 10.4,
-    question: "I jumped the counter and found Kento's shotgun.  I feel a lot better going out in these streets now..",
+    question: "There's a horde of zombies out and about I'm going to try and sneak past...",
     options: [
       {
         option: "Head out the front door!",
-        nextOption: 10.4
+        nextOption: 10.6
       },
       {
         option: "Head out the back door!.",
@@ -225,32 +240,52 @@ const questionNodes = [
       }]
   },
   {
-    id: 10.5,
-    question: "I jumped the counter and found Kento's shotgun.  I feel a lot better going out in these streets now..",
+  id: 10.5,
+  question: "I walked right into a horde of zombies on fire.  I can't escape.... You died!",
+  options: [
+    {
+      option: 'Try again',
+      nextOption: 0
+    }
+  ]
+  },
+  {
+    id: 10.6,
+    question: "They heard me!  BANG BANG!  I'm emptying out my shotgun, covered in blood....I got bit on my wrist....",
+    options: [
+      {
+        option: "Head to the police station.",
+        nextOption: 11
+      },
+      ]
+  },
+  {
+    id: 10.7,
+    question: "The reserved weapons case.... I found a bazooka .  I'm feeling well protected now!  .",
     options: [
       {
         option: "Head out the front door!",
-        nextOption: 10.4
+        nextOption: 10.8
       },
       {
         option: "Head out the back door!.",
-        nextOption: 10.5
+        nextOption: 10.8
       },
       {
         option: "Stay where you are!",
-        nextOption: 10.6
+        nextOption: 10.8
       }]
   },
-
-
-
-
-
-
-
-
-
-
+  {
+    id: 10.8,
+    question: "I walked 3 steps and slipped on Kento's blood.  The bazooka went up in the air and landed on my legs.  I think they're broken.  I started yelling which attracted the zombies.  Crap.  You died! ",
+    options: [
+      {
+        option: "Try again.",
+        nextOption: 0
+      },
+      ]
+  },
   {
     id: 11,
     question: "I made it, time to head into the police station. It's completely deserted",
