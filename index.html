@@ -12,18 +12,23 @@
     <div class="container">
         <div id="Question" class="Question">Question</div>
         <div id="Options" class="button-layout">
-            <button class="button">option 1</button>
-            <button class="button">option 2</button>
-            <button class="button">option 3</button>
-        </div>
     </div>
+        <div id="DeathCount">Deaths: 0</div>
+        <div id="LivesLeft">Lives Left: 3</div>
+        <button id="RestartButton" class="button" onclick="goToStartMenu()">Restart</button>
+    </div>
+
     <script>
         let audio = new Audio('Hallowed Ground.wav');
         audio.loop = true;
-            audio.addEventListener('loadedmetadata', function() {
+        audio.addEventListener('loadedmetadata', function() {
             audio.play(); 
         });
+        function gameOver() {
+            alert('Game Over! You ran out of lives. Press Restart.');
+
+            goToStartMenu();
+        }
     </script>
 </body>
 </html>
-
