@@ -123,7 +123,7 @@ function goToStartMenu() {
 const questionNodes = [
   {
       id: 0,
-      question: "Welcome to the world of Horror!",
+      question: "Welcome to the world of horror!",
       options: [
         {
           option: "Start Game",
@@ -169,7 +169,7 @@ const questionNodes = [
 },
 {
   id: 3,
-  question: "Zombies emerged from behind you, and you were overpowered. YOU DIED.",
+  question: "Zombies emerged from behind you, and you were overpowered. You died!",
   options: [
     {
       option: "Try again.",
@@ -288,14 +288,14 @@ options: [
   },
   {
   id: 10.3,
-  question: "I jumped the counter and found Kento's shotgun.  I feel a lot better going out in these streets now..",
+  question: "I jumped the counter and found Kento's shotgun.  I feel a lot better going out in these streets now...",
   options: [
     {
       option: "Head out the front door!",
       nextOption: 10.4
     },
     {
-      option: "Head out the back door!.",
+      option: "Head out the back door!",
       nextOption: 10.5
     },
     {
@@ -424,7 +424,7 @@ options: [
       nextOption: 11.5
     },
     {
-      option: "Drive to the local diner?  I'm hungry..",
+      option: "Drive to the local diner?  I'm hungry...",
       nextOption: 11.5
     },
     {
@@ -454,10 +454,10 @@ options: [
 },
 {
   id: 11.7,
-  question: "it's morning.  It's still hellish out there. Will have to plan the next phase of my escape...Bali maybe?.",
+  question: "it's morning.  It's still hellish out there. Will have to plan the next phase of my escape...Bali maybe?",
   options: [
     {
-      option: "Thank you for playing, you win! Press restart to play again.",
+      option: "Thank you for playing, YOU WIN! Press restart to play again.",
       nextOption: 0
     },
     ]
@@ -466,4 +466,3 @@ options: [
 ];
 
 startGame();
-

@@ -18,14 +18,8 @@
         <button id="RestartButton" class="button" onclick="goToStartMenu()">Restart</button>
     </div>
     <script>
-        let audio = new Audio('Hallowed Ground.wav');
-        audio.loop = true;
-        audio.addEventListener('loadedmetadata', function() {
-            audio.play(); 
-        });
         function gameOver() {
-            alert('Game Over! You ran out of lives. Press Restart.');
-
+            alert('Game Over! You ran out of lives.');
             goToStartMenu();
         }
     </script>
