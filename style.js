@@ -50,7 +50,12 @@ function showQuestionNode(questionNodeIndex) {
       const button = document.createElement('button');
       button.innerText = option.option;
       button.classList.add('button');
-      button.addEventListener('click', () => selectOption(option));
+      
+      if (questionNode.id === 11.7 && option.nextOption === 0) {
+        button.disabled = true;
+      } else {
+        button.addEventListener('click', () => selectOption(option));
+      }
 
       if (option.nextOption === 0) {
         button.id = 'tryAgainButton';
@@ -452,7 +457,7 @@ options: [
   question: "it's morning.  It's still hellish out there. Will have to plan the next phase of my escape...Bali maybe?.",
   options: [
     {
-      option: "Thank you for playing!",
+      option: "Thank you for playing, you win! Press restart to play again.",
       nextOption: 0
     },
     ]
