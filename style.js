@@ -4,11 +4,17 @@ const deathCountElement = document.getElementById('DeathCount');
 const livesLeftElement = document.getElementById('LivesLeft');
 
 document.addEventListener('DOMContentLoaded', function () {
-  let audio = new Audio('Hallowed Ground.wav');
-  audio.volume = 0.3;
+  let audio = new Audio('HallowedGround.wav');
+  audio.volume = 0.2;
   audio.loop = true;
-  
   audio.play();
+
+  document.addEventListener('click', function () {
+    if (audio.paused) {
+      audio.play();
+    }    
+    document.removeEventListener('click', arguments.callee);
+  });
 });
 
 let state = {
