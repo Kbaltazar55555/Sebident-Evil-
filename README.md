@@ -8,11 +8,8 @@ display("You have once again entered the world of survival.")
 # Set the maximum number of Lives
 maxLives = 3
 
-# Initialize the Lives counter
-remainingLives = maxLives
-
-# Store last scenario location
-lastScenarioLocation = None
+# Set Death Maximum
+maxDeaths = 3
 
 # Main game loop
 while not player.isGameOver() and remainingLives > 0:
